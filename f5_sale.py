@@ -1,10 +1,12 @@
 
 from datetime import datetime
+from uuid import uuid4
 from models import Sale
 
 
 def sell(inventory, plu, qty):
     # 1. Validasi produk dan kuantitas
+    plu = plu.strip().upper()
     product = next(
         (p for p in inventory.products if p.plu == plu),
         None
@@ -13,6 +15,8 @@ def sell(inventory, plu, qty):
     if not product:
         return False, "Produk tidak ditemukan."
 
+    if type(qty) is not int:
+        return False, "Kuantitas harus berupa angka bulat."
     if qty <= 0:
         return False, "Kuantitas harus lebih dari 0."
 
@@ -49,7 +53,7 @@ def sell(inventory, plu, qty):
         batch_details.append((batch.batch_id, take_qty))
 
     # 6. Catat histori penjualan
-    sale_id = f"S-{datetime.now().strftime('%Y%m%d%H%M%S')}"
+    sale_id = f"S-{datetime.now().strftime('%Y%m%d%H%M%S')}-{uuid4().hex}"
 
     new_sale = Sale(
         sale_id,

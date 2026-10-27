@@ -2,6 +2,7 @@
 # F3 - FEFO Transfer (gudang ke rak)
 
 from datetime import datetime
+from uuid import uuid4
 
 try:
     from models import Transfer
@@ -13,6 +14,15 @@ def f3_transfer_fefo(inv, plu_input, jumlah_minta):
     product = inv.find_product(plu)
     if not product:
         return f"PLU {plu} tidak ditemukan."
+
+    if type(jumlah_minta) is not int or jumlah_minta <= 0:
+        return "GAGAL: Jumlah harus berupa angka bulat lebih dari 0."
+
+    # Semua stok fisik di rak memakai ruang, termasuk yang kedaluwarsa.
+    stok_rak = sum(b.shelf_qty for b in inv.batches if b.plu == plu)
+    ruang_rak = max(0, product.shelf_capacity - stok_rak)
+    if jumlah_minta > ruang_rak:
+        return f"GAGAL: Minta {jumlah_minta}, ruang rak hanya {ruang_rak}."
 
     valid_batches = []
     for b in inv.batches:
@@ -63,7 +73,7 @@ def f3_transfer_fefo(inv, plu_input, jumlah_minta):
     for batch_obj, qty in rencana:
         batch_obj.warehouse_qty -= qty
         batch_obj.shelf_qty += qty
-        tid = f"TRF-{datetime.now().strftime('%Y%m%d%H%M%S')}-{batch_obj.batch_id}"
+        tid = f"TRF-{datetime.now().strftime('%Y%m%d%H%M%S')}-{batch_obj.batch_id}-{uuid4().hex}"
         if Transfer is not None:
             try:
                 inv.transfer_log.append(Transfer(tid, plu, batch_obj.batch_id, qty))
