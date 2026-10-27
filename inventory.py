@@ -17,3 +17,4 @@ class Inventory:
             if product.plu == plu:
                 return product
         return None
+    
