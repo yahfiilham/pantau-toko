@@ -1,65 +1,65 @@
 # PantauToko
 
-**Group 2 — Introduction to Computer Programming**
+**Kelompok 2 — Pengantar Pemrograman Komputer**
 
-PantauToko is a Python command-line application for monitoring shop inventory, identifying low shelf stock, warning about expiry dates, and moving or selling stock using **FEFO (First-Expired, First-Out)**.
+PantauToko adalah aplikasi berbasis terminal (CLI) Python untuk memantau persediaan toko, mendeteksi stok rak yang rendah, memberikan peringatan kedaluwarsa, serta memindahkan dan menjual stok menggunakan **FEFO (First-Expired, First-Out)**, yaitu mendahulukan barang dengan tanggal kedaluwarsa terdekat.
 
-Small shops may have stock in the warehouse while shelves are empty, or sell newer stock while older batches approach expiry. PantauToko keeps warehouse and shelf quantities separately and prioritizes the earliest eligible expiry date. Stock changes are reflected immediately within the running session.
+Toko kecil dapat mengalami rak kosong meskipun stok masih tersedia di gudang. Barang yang lebih baru juga dapat terjual lebih dahulu sementara barang lama mendekati kedaluwarsa. PantauToko memisahkan jumlah stok gudang dan rak serta memprioritaskan batch layak jual yang paling dekat kedaluwarsa. Perubahan stok langsung tercermin selama aplikasi berjalan.
 
-Repository: [yahfiilham/pantau-toko](https://github.com/yahfiilham/pantau-toko)
+Repositori: [yahfiilham/pantau-toko](https://github.com/yahfiilham/pantau-toko)
 
-## Team and actual contributions
+## Anggota tim dan kontribusi aktual
 
-The table records completed implementation work, rather than the original proposed allocation. Names and GitHub usernames were confirmed by the team; implementation evidence is available in the commit history.
+Tabel berikut mencatat pekerjaan implementasi yang telah dilakukan. Nama dan username GitHub dikonfirmasi oleh tim; bukti implementasi tersedia dalam riwayat commit. Pembagian aktual ini memperbarui rencana tugas awal.
 
-| Member | GitHub | Actual contribution |
+| Anggota | GitHub | Kontribusi aktual |
 |---|---|---|
-| Calvin — team leader | [kevinwu948](https://github.com/kevinwu948) | Data models, F1 restock alerts and tests, seed data, main-menu integration/F8, integration fixes, F3/F5 bug fixes and regression tests |
-| Yahfi Ilham Maulana | [yahfiilham](https://github.com/yahfiilham) | Repository setup, inventory view in F4, F6 product registration, F7 stock receiving, and associated tests |
-| Fahmi Dhiya Ulhaq | [fahmidhiyaulhaq28-lab](https://github.com/fahmidhiyaulhaq28-lab) | F3 FEFO transfer and its tests |
-| Rizka Sahputri | [rizkasahputri](https://github.com/rizkasahputri) | F2 expiry warnings, F5 sales, and integration updates |
-| Maulana Malik Ibrahim | Not confirmed | No implementation contribution verified in the current `main` history; the originally planned F1/F5 work was completed by Calvin/Rizka |
+| Calvin — ketua kelompok | [kevinwu948](https://github.com/kevinwu948) | Model data, peringatan restock F1 beserta pengujiannya, data contoh, integrasi menu utama/F8, perbaikan integrasi, perbaikan bug F3/F5, dan pengujian regresi |
+| Yahfi Ilham Maulana | [yahfiilham](https://github.com/yahfiilham) | Penyiapan repositori, tampilan inventaris pada F4, pendaftaran produk F6, penerimaan stok F7, dan pengujian terkait |
+| Fahmi Dhiya Ulhaq | [fahmidhiyaulhaq28-lab](https://github.com/fahmidhiyaulhaq28-lab) | Pemindahan stok FEFO F3 beserta pengujiannya |
+| Rizka Sahputri | [rizkasahputri](https://github.com/rizkasahputri) | Peringatan kedaluwarsa F2, penjualan F5, dan pembaruan integrasi |
+| Maulana Malik Ibrahim | Belum dikonfirmasi | Belum ada kontribusi implementasi yang terverifikasi dalam riwayat `main` yang diperiksa; pekerjaan F1/F5 yang semula direncanakan untuknya diselesaikan oleh Calvin/Rizka |
 
-Earlier commits by Calvin use the Git author name `Calvinwu948`; the current configured name is `kevinwu948`. These names should be reconciled when reviewing individual contributions. This table does not replace the Git log or the individual explanations required in the final report.
+Commit lama Calvin menggunakan nama penulis Git `Calvinwu948`; nama yang dikonfigurasi saat ini adalah `kevinwu948`. Kedua nama tersebut perlu dicocokkan saat meninjau kontribusi individu. Tabel ini tetap perlu didukung riwayat Git dan penjelasan kontribusi setiap anggota dalam laporan akhir.
 
 ```bash
 git log --all --format="%h | %an | %s"
 ```
 
-## Features and menu inputs
+## Fitur dan masukan menu
 
-Feature IDs follow the design document. **Feature IDs are not menu numbers:** Activity History belongs to F4; F8 covers menu navigation, validation, and the simulated date.
+ID fitur mengikuti dokumen rancangan. **ID fitur berbeda dari nomor menu:** riwayat aktivitas termasuk F4, sedangkan F8 mencakup navigasi menu, validasi masukan, dan tanggal simulasi. Nama menu dalam tanda kurung mengikuti tampilan aplikasi saat ini.
 
-| Menu | Feature | Input | Result |
+| Menu | Fitur | Masukan | Hasil |
 |---:|---|---|---|
-| 1 | F4 — View Inventory | Product-name keyword; leave blank for all | Name, PLU, unit price, shelf location, shelf/warehouse quantities, and total |
-| 2 | F6 — Add New Product | PLU, name, shelf location, price, minimum shelf stock, shelf capacity, in that order | Register a product with no stock |
-| 3 | F7 — Receive Stock | Existing PLU, positive integer quantity, expiry date `YYYY-MM-DD` | Create a new batch in the warehouse |
-| 4 | F3 — FEFO Transfer | PLU, positive integer quantity, then `y` or `n` | Show the FEFO plan; move stock and record transfers only after confirmation |
-| 5 | F5 — Sale | PLU and positive integer quantity | Deduct eligible shelf stock by FEFO, show subtotal and batch details, record sale, and check restock for that product |
-| 6 | F1 — Restock Alerts | No additional input | Show products below minimum sellable shelf stock, available warehouse stock, and recommended quantities |
-| 7 | F2 — Expiry Warnings | No additional input | Show active expired/expiring batches, sorted by days remaining |
-| 8 | F4 — Activity History | No additional input | Show sale/transfer records, most recent first |
-| 9 | F8 — Set Simulated Date | Date `YYYY-MM-DD` | Change the date used by stock eligibility and expiry calculations |
-| 0 | F8 — Exit | No additional input | End the program |
+| 1 | F4 — Lihat inventaris (`View Inventory`) | Kata kunci nama produk; kosongkan untuk melihat semua | Nama, PLU, harga satuan, lokasi rak, jumlah stok rak/gudang, dan total |
+| 2 | F6 — Tambah produk (`Add New Product`) | PLU, nama, lokasi rak, harga, minimum stok rak, kapasitas rak, sesuai urutan tersebut | Mendaftarkan produk tanpa stok awal |
+| 3 | F7 — Terima stok (`Receive Stock`) | PLU terdaftar, jumlah berupa bilangan bulat positif, tanggal kedaluwarsa `YYYY-MM-DD` | Membuat batch baru di gudang |
+| 4 | F3 — Pemindahan FEFO (`Transfer Warehouse to Shelf`) | PLU, jumlah berupa bilangan bulat positif, lalu `y` atau `n` | Menampilkan rencana FEFO; memindahkan stok dan mencatatnya setelah konfirmasi |
+| 5 | F5 — Penjualan (`Sale`) | PLU dan jumlah berupa bilangan bulat positif | Mengurangi stok rak layak jual berdasarkan FEFO, menampilkan subtotal dan rincian batch, mencatat penjualan, lalu mengecek restock produk tersebut |
+| 6 | F1 — Peringatan restock (`Check Restock Alerts`) | Tidak ada masukan tambahan | Menampilkan produk dengan stok rak layak jual di bawah minimum, stok gudang tersedia, dan jumlah yang disarankan |
+| 7 | F2 — Peringatan kedaluwarsa (`Check Expiry Warnings`) | Tidak ada masukan tambahan | Menampilkan batch berstok yang sudah atau mendekati kedaluwarsa, diurutkan berdasarkan sisa hari |
+| 8 | F4 — Riwayat aktivitas (`Activity History`) | Tidak ada masukan tambahan | Menampilkan catatan penjualan/pemindahan dari yang terbaru |
+| 9 | F8 — Atur tanggal simulasi (`Set Simulated Date`) | Tanggal `YYYY-MM-DD` | Mengubah tanggal acuan kelayakan stok dan perhitungan kedaluwarsa |
+| 0 | F8 — Keluar (`Exit`) | Tidak ada masukan tambahan | Mengakhiri program |
 
-### Validation and business rules
+### Validasi dan aturan bisnis
 
-- PLUs are strings, so leading zeros are preserved. Registration and transaction inputs trim spaces and normalize letters to uppercase. Registered PLUs must be unique.
-- Product name and shelf location cannot be blank. Price and capacity must be positive integers; minimum stock must be a nonnegative integer no greater than capacity.
-- Received stock goes into a **new warehouse batch**, including when another batch has the same expiry date. Expired receipts are rejected.
-- Transfer quantities must fit both eligible warehouse stock and available physical shelf space. Expired items still occupying a shelf count toward its capacity.
-- Sales use only eligible **shelf** stock. Warehouse stock cannot be sold directly. Insufficient stock and invalid quantities are rejected.
-- FEFO skips expired batches and consumes earlier expiry dates first. A batch expiring **today is still eligible**.
-- Expiry status is `EXPIRED` for fewer than 0 days, `EXPIRING_SOON` for 0–30 days inclusive, and `SAFE` for more than 30 days. Empty batches are omitted; menu 7 displays only warnings, not SAFE batches.
-- A valid transfer requires `y` (case-insensitive); other confirmation input cancels it. Invalid form input generally returns to the main menu so the user can try again.
-- Sale and transfer IDs include UUIDs to distinguish transactions created within the same second.
+- PLU disimpan sebagai string sehingga angka nol di awal tetap dipertahankan. Masukan pendaftaran dan transaksi menghapus spasi di awal/akhir serta mengubah huruf menjadi kapital. PLU yang didaftarkan harus unik.
+- Nama produk dan lokasi rak tidak boleh kosong. Harga dan kapasitas harus berupa bilangan bulat positif; minimum stok harus berupa bilangan bulat tidak negatif dan tidak melebihi kapasitas.
+- Stok yang diterima masuk ke **batch gudang baru**, termasuk jika sudah ada batch dengan tanggal kedaluwarsa sama. Penerimaan barang kedaluwarsa ditolak.
+- Jumlah pemindahan harus sesuai dengan stok gudang layak jual dan ruang fisik rak yang tersedia. Barang kedaluwarsa yang masih berada di rak tetap dihitung sebagai pemakai kapasitas.
+- Penjualan hanya menggunakan stok **rak** yang layak jual. Stok gudang tidak dapat langsung dijual. Jumlah tidak valid dan penjualan melebihi stok ditolak.
+- FEFO melewati batch kedaluwarsa dan mengambil batch dengan tanggal kedaluwarsa lebih awal terlebih dahulu. Batch yang kedaluwarsa **hari ini masih dianggap layak jual**.
+- Status kedaluwarsa adalah `EXPIRED` jika sisa hari kurang dari 0, `EXPIRING_SOON` jika 0–30 hari, dan `SAFE` jika lebih dari 30 hari. Batch kosong tidak ditampilkan; menu 7 hanya menampilkan peringatan sehingga batch SAFE tidak muncul.
+- Pemindahan yang valid memerlukan konfirmasi `y`, tanpa membedakan huruf besar/kecil; masukan konfirmasi lainnya membatalkan pemindahan. Masukan formulir yang tidak valid umumnya mengembalikan pengguna ke menu utama agar dapat mencoba lagi.
+- ID penjualan dan pemindahan menggunakan UUID untuk membedakan transaksi yang dibuat dalam detik yang sama.
 
-## Run the application
+## Cara menjalankan aplikasi
 
-The application uses the **Python standard library only**. `pytest` is needed to run the tests. The verified environment is Windows 11, Python 3.14.0, and pytest 9.0.3.
+Aplikasi hanya menggunakan **pustaka standar Python**. `pytest` diperlukan untuk menjalankan pengujian. Lingkungan yang telah diverifikasi adalah Windows 11, Python 3.14.0, dan pytest 9.0.3.
 
-With Python and Git available, run:
+Setelah Python dan Git tersedia, jalankan:
 
 ```bash
 git clone https://github.com/yahfiilham/pantau-toko.git
@@ -67,66 +67,66 @@ cd pantau-toko
 python main.py
 ```
 
-On systems where Python is named `python3`, substitute `python3` for `python`. Run commands from the repository root. No database, API credentials, or environment variables are required.
+Jika perintah Python pada sistem bernama `python3`, gunakan `python3` sebagai pengganti `python`. Jalankan perintah dari folder utama repositori. Aplikasi tidak memerlukan database, kredensial API, atau variabel lingkungan.
 
-Each start loads **19 demo products and 35 stock batches** from `seed_data.py`. Their expiry dates are relative to the computer's date at startup. All data is in memory: **exiting discards changes**, and restarting reloads the seed data.
+Setiap kali dijalankan, aplikasi memuat **19 produk contoh dan 35 batch stok** dari `seed_data.py`. Tanggal kedaluwarsanya dihitung relatif terhadap tanggal komputer saat aplikasi dimulai. Seluruh data disimpan di memori: **perubahan hilang setelah keluar**, dan menjalankan ulang aplikasi akan memuat kembali data contoh.
 
-## Reproducible demonstration
+## Skenario demonstrasi yang dapat diulang
 
-Start a fresh application. The following sequence exercises all F1–F8 features using a new product with fixed dates, so its expected results do not depend on the startup date.
+Mulai aplikasi dalam sesi baru. Urutan berikut mencakup seluruh fitur F1–F8 menggunakan produk baru dengan tanggal tetap, sehingga hasil produk tersebut tidak bergantung pada tanggal saat aplikasi dimulai.
 
-| Step | Menu and subsequent inputs, in order | Expected result |
+| Langkah | Menu dan masukan berikutnya secara berurutan | Hasil yang diharapkan |
 |---:|---|---|
-| 1 | `9` → `2026-10-28` | Simulated date becomes 2026-10-28 |
-| 2 | `2` → `AUDIT` → `Audit Product` → `Z1` → `1250` → `3` → `10` | Product registered: price 1250, minimum 3, capacity 10 |
-| 3 | `3` → `AUDIT` → `8` → `2026-12-27` | Batch B036: 8 in warehouse, 0 on shelf |
-| 4 | `3` → `AUDIT` → `4` → `2026-10-28` | Batch B037: 4 in warehouse, 0 on shelf |
-| 5 | `6` | AUDIT has shelf stock 0, warehouse stock 12, recommended restock 10 |
-| 6 | `7` | B037 is EXPIRING_SOON with 0 days left and a warehouse-priority note |
-| 7 | `4` → `AUDIT` → `8` → `y` | FEFO transfers B037 × 4, then B036 × 4 |
-| 8 | `5` → `AUDIT` → `6` | Sale consumes B037 × 4, then B036 × 2; subtotal `Rp7,500`; restock recommendation 4 |
-| 9 | `1` → `Audit Product` | Shelf 2, warehouse 4, total 6 |
-| 10 | `8` | One sale and two per-batch transfer records are visible |
-| 11 | `9` → `2026-12-28`, then `7` | B036 is EXPIRED; empty B037 is omitted |
-| 12 | `5` → `AUDIT` → `1` | Sale rejected: eligible shelf stock is 0 |
-| 13 | `0` | Exit normally |
+| 1 | `9` → `2026-10-28` | Tanggal simulasi menjadi 2026-10-28 |
+| 2 | `2` → `AUDIT` → `Audit Product` → `Z1` → `1250` → `3` → `10` | Produk terdaftar dengan harga 1250, minimum stok 3, dan kapasitas 10 |
+| 3 | `3` → `AUDIT` → `8` → `2026-12-27` | Batch B036: stok gudang 8, stok rak 0 |
+| 4 | `3` → `AUDIT` → `4` → `2026-10-28` | Batch B037: stok gudang 4, stok rak 0 |
+| 5 | `6` | AUDIT memiliki stok rak 0, stok gudang 12, dan rekomendasi restock 10 |
+| 6 | `7` | B037 berstatus EXPIRING_SOON dengan sisa 0 hari dan catatan prioritas pemindahan dari gudang |
+| 7 | `4` → `AUDIT` → `8` → `y` | FEFO memindahkan B037 × 4, lalu B036 × 4 |
+| 8 | `5` → `AUDIT` → `6` | Penjualan mengambil B037 × 4, lalu B036 × 2; subtotal `Rp7,500`; rekomendasi restock 4 |
+| 9 | `1` → `Audit Product` | Stok rak 2, stok gudang 4, total 6 |
+| 10 | `8` | Terlihat satu catatan penjualan dan dua catatan pemindahan per batch |
+| 11 | `9` → `2026-12-28`, lalu `7` | B036 berstatus EXPIRED; B037 yang kosong tidak ditampilkan |
+| 12 | `5` → `AUDIT` → `1` | Penjualan ditolak karena stok rak layak jual 0 |
+| 13 | `0` | Aplikasi keluar dengan normal |
 
-Each arrow represents pressing Enter after an input. B036/B037 assume no other receipts have been entered in that session. Other seeded products may also appear in alert lists.
+Setiap panah berarti menekan Enter setelah memasukkan nilai. Nomor B036/B037 mengasumsikan belum ada penerimaan stok lain dalam sesi tersebut. Produk contoh lain dapat ikut muncul dalam daftar peringatan. Nama produk uji `Audit Product` dan format keluaran `Rp7,500` dipertahankan agar sesuai dengan skenario yang telah dijalankan.
 
-For validation demonstrations, use a fresh session:
+Untuk demonstrasi validasi, gunakan sesi baru:
 
-- `4` → `1019` → `1`: reject transfer because the shelf is already full; no confirmation is requested.
-- `4` → `1001` → `-1`: reject a negative transfer quantity.
-- `4` → `1001` → `1` → `n`: cancel a valid transfer without changing stock.
-- `3` → `1001` → `1` → `2026-02-30`: reject an impossible expiry date.
-- `5` → `1001` → `6`: reject sale because the initial eligible shelf stock is only 5.
+- `4` → `1019` → `1`: pemindahan ditolak karena rak sudah penuh; konfirmasi tidak diminta.
+- `4` → `1001` → `-1`: jumlah pemindahan negatif ditolak.
+- `4` → `1001` → `1` → `n`: pemindahan dibatalkan tanpa mengubah stok.
+- `3` → `1001` → `1` → `2026-02-30`: tanggal kedaluwarsa yang tidak ada ditolak.
+- `5` → `1001` → `6`: penjualan ditolak karena stok rak layak jual awal hanya 5.
 
-Capture terminal screenshots showing the input and completed result when preparing the report. This README's sample expectations are not screenshot evidence.
+Saat menyusun laporan, ambil tangkapan layar terminal yang memperlihatkan masukan dan hasil kasus yang selesai. Hasil yang diharapkan dalam README ini tetap perlu dilengkapi bukti tangkapan layar aplikasi.
 
-## System flowchart
+## Diagram alur sistem
 
 ```mermaid
 flowchart TD
-    A([Start]) --> B[Create Inventory and load seed data]
-    B --> C[Display menu and read choice]
-    C --> D{Selected action}
-    D -->|0| Z([Exit])
-    D -->|1, 6, 7, 8| E[Calculate and display inventory, alerts, or history]
-    D -->|2, 3, 5, 9| F[Read and validate form input]
-    D -->|4| G[Validate PLU, quantity, stock, and shelf capacity]
-    D -->|Unknown| H[Show invalid-choice message]
+    A([Mulai]) --> B[Buat Inventory dan muat data contoh]
+    B --> C[Tampilkan menu dan baca pilihan]
+    C --> D{Pilihan tindakan}
+    D -->|0| Z([Keluar])
+    D -->|1, 6, 7, 8| E[Hitung dan tampilkan inventaris, peringatan, atau riwayat]
+    D -->|2, 3, 5, 9| F[Baca dan validasi masukan formulir]
+    D -->|4| G[Validasi PLU, jumlah, stok, dan kapasitas rak]
+    D -->|Tidak dikenal| H[Tampilkan pesan pilihan tidak valid]
     F --> I{Valid?}
-    I -->|No| J[Show error]
-    I -->|Yes| K[Add product, receive stock, sell, or set date]
-    K --> L{Sale succeeded?}
-    L -->|Yes| M[Record sale and display product restock status]
-    L -->|No or other action| C
-    G --> N{Eligible transfer?}
-    N -->|No| J
-    N -->|Yes| O[Sort batches by expiry and display transfer plan]
-    O --> P{Confirm y?}
-    P -->|Yes| Q[Move stock and record each batch transfer]
-    P -->|No| R[Cancel without stock changes]
+    I -->|Tidak| J[Tampilkan pesan kesalahan]
+    I -->|Ya| K[Tambah produk, terima stok, jual, atau atur tanggal]
+    K --> L{Penjualan berhasil?}
+    L -->|Ya| M[Catat penjualan dan tampilkan status restock produk]
+    L -->|Tidak atau tindakan lain| C
+    G --> N{Pemindahan memenuhi syarat?}
+    N -->|Tidak| J
+    N -->|Ya| O[Urutkan batch berdasarkan kedaluwarsa dan tampilkan rencana]
+    O --> P{Konfirmasi y?}
+    P -->|Ya| Q[Pindahkan stok dan catat pemindahan setiap batch]
+    P -->|Tidak| R[Batalkan tanpa perubahan stok]
     E --> C
     H --> C
     J --> C
@@ -135,53 +135,53 @@ flowchart TD
     R --> C
 ```
 
-## Data model and source organization
+## Model data dan susunan kode
 
-| Class | Purpose and principal attributes |
+| Kelas | Fungsi dan atribut utama |
 |---|---|
-| `Product` | Product master: `plu`, `name`, `price`, `shelf_location`, `min_shelf_stock`, `shelf_capacity` |
-| `StockBatch` | One received batch: `batch_id`, `plu`, `expiry_date`, `warehouse_qty`, `shelf_qty` |
-| `Transfer` | Per-batch transfer record: ID, timestamp, PLU, batch ID, quantity |
-| `Sale` | Sale record: ID, timestamp, PLU, quantity, unit price at sale, batch allocations |
-| `Inventory` | Holds products, batches, transfer/sale logs, simulated `today`, and product lookup |
+| `Product` | Data master produk: `plu`, `name`, `price`, `shelf_location`, `min_shelf_stock`, `shelf_capacity` |
+| `StockBatch` | Satu batch penerimaan: `batch_id`, `plu`, `expiry_date`, `warehouse_qty`, `shelf_qty` |
+| `Transfer` | Catatan pemindahan per batch: ID, waktu, PLU, ID batch, jumlah |
+| `Sale` | Catatan penjualan: ID, waktu, PLU, jumlah, harga satuan saat transaksi, rincian pengambilan batch |
+| `Inventory` | Menyimpan daftar produk, batch, catatan pemindahan/penjualan, tanggal simulasi `today`, serta pencarian produk |
 
-`Inventory` owns lists of the other objects. One product can have many batches; `plu` connects them. Transfer changes the warehouse/shelf split without changing total physical stock. Sale reduces the physical total by the sold quantity.
+`Inventory` memiliki daftar objek lainnya. Satu produk dapat mempunyai banyak batch yang dihubungkan oleh `plu`. Pemindahan mengubah pembagian stok antara gudang dan rak tanpa mengubah total stok fisik. Penjualan mengurangi total stok fisik sesuai jumlah yang terjual.
 
-| File | Responsibility |
+| Berkas | Tanggung jawab |
 |---|---|
-| [main.py](main.py) | Main menu, routing, simulated date, printed alerts |
-| [models.py](models.py), [inventory.py](inventory.py) | Data objects, shared in-memory state, product lookup |
-| [seed_data.py](seed_data.py) | Demo products and batches |
-| [f1_get_restock_alerts.py](f1_get_restock_alerts.py) | Sellable stock totals and restock recommendations |
-| [f2_expirywarning.py](f2_expirywarning.py) | Expiry classification and sorting |
-| [f3_transfer_fefo.py](f3_transfer_fefo.py) | Transfer validation, planning, confirmation, execution, logging |
-| [f4_view_inventory.py](f4_view_inventory.py) | Inventory summaries, search, formatting, activity history |
-| [f5_sale.py](f5_sale.py) | Sale validation, FEFO deductions, subtotal, sale logging |
-| [f6_add_product.py](f6_add_product.py) | Product registration and its form |
-| [f7_receive_stock.py](f7_receive_stock.py) | Receipt validation, batch creation, and its form |
-| [test/](test/), [pytest.ini](pytest.ini) | Automated tests and pytest configuration |
+| [main.py](main.py) | Menu utama, pemilihan fitur, tanggal simulasi, dan tampilan peringatan |
+| [models.py](models.py), [inventory.py](inventory.py) | Objek data, keadaan bersama di memori, dan pencarian produk |
+| [seed_data.py](seed_data.py) | Produk dan batch contoh untuk demonstrasi |
+| [f1_get_restock_alerts.py](f1_get_restock_alerts.py) | Perhitungan stok layak jual dan rekomendasi restock |
+| [f2_expirywarning.py](f2_expirywarning.py) | Klasifikasi dan pengurutan kedaluwarsa |
+| [f3_transfer_fefo.py](f3_transfer_fefo.py) | Validasi, perencanaan, konfirmasi, pelaksanaan, dan pencatatan pemindahan |
+| [f4_view_inventory.py](f4_view_inventory.py) | Ringkasan inventaris, pencarian, format tampilan, dan riwayat aktivitas |
+| [f5_sale.py](f5_sale.py) | Validasi penjualan, pengurangan stok FEFO, subtotal, dan pencatatan penjualan |
+| [f6_add_product.py](f6_add_product.py) | Pendaftaran produk beserta formulirnya |
+| [f7_receive_stock.py](f7_receive_stock.py) | Validasi penerimaan, pembuatan batch, dan formulirnya |
+| [test/](test/), [pytest.ini](pytest.ini) | Pengujian otomatis dan konfigurasi pytest |
 
-The implementation uses separate feature functions receiving an `Inventory` object. The early design proposed placing all business methods inside `Inventory`; the current modular layout differs while sharing the same data model. `utils.py` and `test/testinventory.py` are currently empty placeholders and are not needed to run the application.
+Implementasi menggunakan fungsi fitur yang terpisah dan menerima objek `Inventory`. Rancangan awal mengusulkan seluruh metode bisnis berada di dalam `Inventory`; susunan modular saat ini berbeda, tetapi tetap berbagi model data yang sama. `utils.py` dan `test/testinventory.py` saat ini merupakan berkas kosong dan tidak diperlukan untuk menjalankan aplikasi.
 
-## Programming concepts applied
+## Konsep pemrograman yang diterapkan
 
-| Course requirement | Concrete implementation |
+| Persyaratan mata kuliah | Penerapan dalam program |
 |---|---|
-| Variables and suitable data types | String PLUs/names, integer prices/quantities, Boolean success results, `date` and `datetime` values |
-| User input and program output | `input()` forms and `print()` menus, tables, alerts, and transaction results |
-| Arithmetic operators | `price * qty`, warehouse subtraction, shelf addition, and date differences |
-| Relational and logical operators | `qty <= 0`, `expiry_date >= today`, and batch filters combining conditions with `and`/`or` |
-| Conditional statements | `if`/`elif`/`else` for menu routing, validation, and expiry status |
-| Loop statements | `while True` main loop and `for` loops scanning products, batches, and history |
-| Functions | `get_restock_alerts`, `get_expiry_alerts`, `f3_transfer_fefo`, `sell`, and menu functions |
-| Lists | Product/batch collections, FEFO plans, transaction logs, and summary results |
-| String manipulation | `.strip().upper()` PLU normalization, `.lower()` name search, substring matching, and formatted output |
-| Classes / OOP — optional in the assignment | `Product`, `StockBatch`, `Transfer`, `Sale`, and `Inventory` |
-| Unit tests | `unittest.TestCase`, pytest assertions/parameterization, and mocked confirmation/clock inputs in `test/` |
+| Variabel dan tipe data yang sesuai | PLU/nama berupa string, harga/jumlah berupa integer, hasil keberhasilan berupa Boolean, serta nilai `date` dan `datetime` |
+| Masukan pengguna dan keluaran program | Formulir `input()` serta menu, tabel, peringatan, dan hasil transaksi melalui `print()` |
+| Operator aritmetika | `price * qty`, pengurangan stok gudang, penambahan stok rak, dan selisih tanggal |
+| Operator relasional dan logika | `qty <= 0`, `expiry_date >= today`, serta penyaringan batch dengan gabungan kondisi `and`/`or` |
+| Percabangan | `if`/`elif`/`else` untuk pemilihan menu, validasi, dan status kedaluwarsa |
+| Perulangan | `while True` pada menu utama dan perulangan `for` untuk memeriksa produk, batch, serta riwayat |
+| Fungsi | `get_restock_alerts`, `get_expiry_alerts`, `f3_transfer_fefo`, `sell`, dan fungsi menu |
+| List | Kumpulan produk/batch, rencana FEFO, catatan transaksi, dan hasil ringkasan |
+| Manipulasi string | Normalisasi PLU dengan `.strip().upper()`, pencarian nama dengan `.lower()`, pencocokan bagian string, dan pemformatan keluaran |
+| Kelas / OOP — opsional dalam tugas | `Product`, `StockBatch`, `Transfer`, `Sale`, dan `Inventory` |
+| Pengujian unit | `unittest.TestCase`, asersi/parametrisasi pytest, serta simulasi masukan konfirmasi dan waktu di folder `test/` |
 
-### Code snippets to explain during presentation
+### Potongan kode untuk dijelaskan saat presentasi
 
-**1. Stock eligibility and iteration — `f1_get_restock_alerts.py`:**
+**1. Kelayakan stok dan perulangan — `f1_get_restock_alerts.py`:**
 
 ```python
 for batch in inventory.batches:
@@ -189,17 +189,17 @@ for batch in inventory.batches:
         total_shelf_stock += batch.shelf_qty
 ```
 
-The loop selects batches for one product. Logical `and` combines the product match and expiry condition, and `+=` accumulates only eligible shelf stock.
+Perulangan memilih batch untuk satu produk. Operator logika `and` menggabungkan kecocokan produk dengan syarat tanggal kedaluwarsa, sedangkan `+=` menjumlahkan stok rak yang masih layak jual.
 
-**2. FEFO ordering — `f5_sale.py`:**
+**2. Pengurutan FEFO — `f5_sale.py`:**
 
 ```python
 valid_batches.sort(key=lambda x: x.expiry_date)
 ```
 
-Sorting by expiry date puts the earliest eligible batch first. The following sale loop takes the smaller of the batch's shelf stock and the remaining requested quantity, allowing one sale to span several batches.
+Pengurutan berdasarkan tanggal kedaluwarsa menempatkan batch layak jual dengan tanggal terdekat di urutan pertama. Perulangan penjualan berikutnya mengambil nilai terkecil antara stok rak batch dan sisa jumlah yang diminta, sehingga satu penjualan dapat mengambil stok dari beberapa batch.
 
-**3. Capacity protection — `f3_transfer_fefo.py`:**
+**3. Perlindungan kapasitas rak — `f3_transfer_fefo.py`:**
 
 ```python
 stok_rak = sum(b.shelf_qty for b in inv.batches if b.plu == plu)
@@ -208,46 +208,46 @@ if jumlah_minta > ruang_rak:
     return f"GAGAL: Minta {jumlah_minta}, ruang rak hanya {ruang_rak}."
 ```
 
-This sums physical shelf stock, calculates remaining capacity, and rejects an oversized transfer before requesting confirmation or changing quantities.
+Kode ini menjumlahkan stok fisik di rak, menghitung sisa kapasitas, dan menolak pemindahan yang terlalu besar sebelum meminta konfirmasi atau mengubah jumlah stok.
 
-## Automated tests
+## Pengujian otomatis
 
-Install the test runner and run the repository suite:
+Pasang alat pengujian dan jalankan seluruh pengujian dalam repositori:
 
 ```bash
 python -m pip install pytest
 python -m pytest -q
 ```
 
-For individual results, use `python -m pytest -v`. `pytest.ini` sets the project import path and the `test` directory. Run pytest rather than relying on unittest discovery alone because several tests use pytest functions and parameterization.
+Untuk melihat hasil setiap kasus, gunakan `python -m pytest -v`. `pytest.ini` mengatur jalur impor proyek dan folder `test`. Gunakan pytest agar pengujian berbentuk fungsi dan parametrisasi pytest ikut dijalankan, selain pengujian berbasis unittest.
 
-At implementation commit `858159e`, **47 repository tests passed** on Python 3.14.0 / pytest 9.0.3. This includes 20 F3/F5 regression cases for invalid quantities, capacity, FEFO, normalization, and transaction-ID uniqueness.
+Pada commit implementasi `858159e`, **47 pengujian dalam repositori lulus** menggunakan Python 3.14.0 / pytest 9.0.3. Jumlah ini mencakup 20 kasus regresi F3/F5 untuk jumlah tidak valid, kapasitas, FEFO, normalisasi, dan keunikan ID transaksi.
 
-An additional external audit ran **91 checks: 54 function/integration checks and 37 real CLI subprocess scenarios**, all passing after the fixes. Those external scripts are not included in this repository, so a fresh clone runs **47**, not 138, tests. The additional cases are useful candidates for inclusion before final submission, especially F2 expiry boundaries, F4 history, F5 expired-stock rejection, and F8 input/date flows. Passing the tested cases is not a claim that every possible input is covered.
+Audit tambahan di luar repositori menjalankan **91 pemeriksaan: 54 pemeriksaan fungsi/integrasi dan 37 skenario CLI melalui proses aplikasi asli**, semuanya lulus setelah perbaikan. Skrip audit tersebut belum disertakan dalam repositori, sehingga hasil clone baru menjalankan **47 pengujian**, bukan 138. Kasus tambahan tersebut dapat dimasukkan sebelum pengumpulan, terutama batas kedaluwarsa F2, riwayat F4, penolakan stok kedaluwarsa F5, dan alur masukan/tanggal F8. Hasil lulus berlaku untuk kasus yang telah diuji; seluruh kemungkinan masukan belum tercakup.
 
-## Scope and current limitations
+## Ruang lingkup dan keterbatasan saat ini
 
-- No persistent storage, login, supplier ordering, payment processing, returns, financial reporting, or multiple branches. These are outside the agreed project scope. Subtotal is informational; there is no payment or change calculation.
-- There is no expired-stock disposal operation. Expired stock stays visible in inventory and is blocked from sale/transfer.
-- Inventory summaries show **physical** quantities, including expired stock. Restock calculations use **sellable** quantities. F1 currently calculates recommended space from sellable shelf stock, while F3 checks physical capacity; if expired items remain on the shelf, a recommendation may exceed the space F3 allows. These calculations need alignment before presenting that edge case as supported.
-- The F2 warning currently shows batch ID, PLU, days remaining, warehouse/shelf quantities, and a note. The named shelf location requested in the original design is not yet shown in that warning; it is available in View Inventory.
-- The CLI currently mixes English menu labels with Indonesian prompts/messages. A consistent display language remains a presentation improvement.
-- Changing the simulated date affects eligibility and warnings, not the original seed dates or the real wall-clock timestamps used in transaction history.
+- Penyimpanan permanen, login, pemesanan ke pemasok, pemrosesan pembayaran, retur, laporan keuangan, dan banyak cabang berada di luar ruang lingkup yang disepakati. Subtotal hanya sebagai informasi; tidak ada perhitungan pembayaran atau kembalian.
+- Belum ada operasi penghapusan stok kedaluwarsa. Stok tersebut tetap terlihat dalam inventaris dan diblokir dari penjualan/pemindahan.
+- Ringkasan inventaris menampilkan jumlah **fisik**, termasuk barang kedaluwarsa. Perhitungan restock menggunakan jumlah **layak jual**. F1 saat ini menghitung rekomendasi ruang berdasarkan stok rak layak jual, sedangkan F3 memeriksa kapasitas fisik; jika barang kedaluwarsa masih berada di rak, rekomendasi dapat melebihi ruang yang diizinkan F3. Kedua perhitungan perlu diselaraskan agar kondisi ini ditangani dengan benar.
+- Peringatan F2 saat ini menampilkan ID batch, PLU, sisa hari, jumlah gudang/rak, dan catatan. Nama lokasi rak yang diminta dalam rancangan awal belum ditampilkan pada peringatan tersebut; informasi itu tersedia di menu Lihat Inventaris.
+- CLI saat ini mencampurkan label menu berbahasa Inggris dengan masukan/pesan berbahasa Indonesia. Penyelarasan bahasa tampilan masih menjadi perbaikan untuk presentasi.
+- Perubahan tanggal simulasi memengaruhi kelayakan stok dan peringatan. Tanggal awal batch contoh dan waktu nyata yang dicatat dalam riwayat transaksi tetap mengikuti pembuatannya.
 
-## Course submission and presentation checklist
+## Daftar periksa pengumpulan dan presentasi
 
-This README supplies project documentation and user-guide material. The assignment separately requires a **PDF report** and a class presentation.
+README ini menyediakan dokumentasi proyek dan bahan panduan pengguna. Tugas juga mewajibkan **laporan PDF** serta presentasi di kelas.
 
-- [x] Python CLI source and required programming concepts implemented.
-- [x] Public source repository and runnable repository tests available.
-- [x] User guide, inputs, system flowchart, code explanations, and actual contribution summary documented here.
-- [ ] Complete the final PDF: member introductions/roles, background problem, flowchart, code snippets and explanations, programming concepts, user guide, and screenshots of completed cases.
-- [ ] Capture actual application screenshots for successful and rejected cases; include captions and expected/actual results in the PDF.
-- [ ] Verify each member's genuine contribution against Git history and explain reassigned work accurately.
-- [ ] Confirm that the system proposal was submitted; the assignment lists 21 October as its deadline.
-- [ ] Rehearse a maximum 20-minute presentation demonstrating all features and explaining the source flow, followed by 5 minutes of Q&A, extendable by another 5 minutes under the presentation rules.
-- [ ] Prepare the peer-assessment allocation and written rationales for the other teams, following the lecturer's form.
+- [x] Kode CLI Python dan konsep pemrograman yang diwajibkan telah diterapkan.
+- [x] Repositori publik dan pengujian yang dapat dijalankan tersedia.
+- [x] Panduan pengguna, masukan, diagram alur, penjelasan kode, dan ringkasan kontribusi aktual didokumentasikan di sini.
+- [ ] Lengkapi laporan PDF akhir: perkenalan/peran anggota, latar belakang masalah, diagram alur, potongan kode beserta penjelasannya, konsep pemrograman, panduan pengguna, dan tangkapan layar kasus yang selesai.
+- [ ] Ambil tangkapan layar aplikasi untuk kasus berhasil maupun ditolak; sertakan keterangan dan hasil yang diharapkan/aktual dalam PDF.
+- [ ] Cocokkan kontribusi nyata setiap anggota dengan riwayat Git dan jelaskan pengalihan tugas secara akurat.
+- [ ] Pastikan proposal sistem telah dikumpulkan; dokumen tugas mencantumkan batas waktu 21 Oktober.
+- [ ] Latihan presentasi maksimal 20 menit dengan demonstrasi semua fitur dan penjelasan alur kode, dilanjutkan tanya jawab 5 menit yang dapat diperpanjang 5 menit lagi sesuai aturan presentasi.
+- [ ] Siapkan alokasi penilaian antarkelompok dan alasan tertulis untuk kelompok lain sesuai formulir dosen.
 
-Suggested presentation timing: background and roles 3 minutes, feature demonstration 9 minutes, flowchart/code/concepts 5 minutes, testing and limitations 2 minutes, and 1 minute buffer. This timing is a team suggestion, not a separate lecturer requirement.
+Saran pembagian waktu presentasi: latar belakang dan peran anggota 3 menit, demonstrasi fitur 9 menit, diagram alur/kode/konsep 5 menit, pengujian dan keterbatasan 2 menit, serta cadangan 1 menit. Pembagian ini merupakan saran untuk tim.
 
-The assignment rubric allocates 25 points to presentation, while the separate presentation-rules document lists 30 points. Confirm the applicable weighting with the lecturer. The assignment also states an individual penalty of 50 points for a member with no commit contribution; do not substitute an unverified role claim for actual work.
+Rubrik tugas mengalokasikan 25 poin untuk presentasi, sedangkan dokumen aturan presentasi mencantumkan 30 poin. Konfirmasikan bobot yang berlaku kepada dosen. Dokumen tugas juga menyatakan penalti individual 50 poin bagi anggota tanpa kontribusi commit; pastikan penjelasan peran didukung pekerjaan yang benar-benar dilakukan.
