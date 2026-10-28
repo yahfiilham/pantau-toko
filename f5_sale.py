@@ -7,15 +7,12 @@ from models import Sale
 def sell(inventory, plu, qty):
     # 1. Validasi produk dan kuantitas
     plu = plu.strip().upper()
-    product = next(
-        (p for p in inventory.products if p.plu == plu),
-        None
-    )
+    product = inventory.find_product(plu)
 
     if not product:
         return False, "Produk tidak ditemukan."
 
-    if type(qty) is not int:
+    if not isinstance(qty, int):
         return False, "Kuantitas harus berupa angka bulat."
     if qty <= 0:
         return False, "Kuantitas harus lebih dari 0."
