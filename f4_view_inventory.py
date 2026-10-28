@@ -1,3 +1,5 @@
+from utils import print_table
+
 def format_rupiah(amount):
     return "Rp " + f"{amount:,}".replace(",", ".")
 
@@ -40,13 +42,14 @@ def menu_view_inventory(inv):
             print(f"Tidak ada produk dengan nama mengandung '{keyword.strip()}'.")
         return
 
-    print(f"{'PLU':<8}{'Nama':<22}{'Harga':>12}  {'Lokasi':<12}"
-          f"{'Stok Rak':>9}{'Stok Gudang':>13}{'Total':>7}")
-    print("-" * 85)
+    headers = ["PLU", "Nama", "Harga", "Lokasi", "Stok Rak", "Stok Gudang", "Total"]
+    align = ["<", "<", ">", "<", ">", ">", ">"]
+    rows = []
     for row in summary:
-        print(f"{row['plu']:<8}{row['name'][:21]:<22}"
-              f"{format_rupiah(row['price']):>12}  {row['shelf_location'][:11]:<12}"
-              f"{row['shelf_qty']:>9}{row['warehouse_qty']:>13}{row['total_qty']:>7}")
+        rows.append([row["plu"], row["name"], format_rupiah(row["price"]),
+                     row["shelf_location"], row["shelf_qty"],
+                     row["warehouse_qty"], row["total_qty"]])
+    print_table(headers, rows, align)
 
 
 def get_activity_history(inventory):
