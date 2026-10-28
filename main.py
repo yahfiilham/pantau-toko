@@ -143,6 +143,8 @@ def tampilkan_expiry_alert(alert):
     print("----------------------------------------")
     print(f"Batch ID    : {alert['batch_id']}")
     print(f"PLU         : {alert['plu']}")
+    print(f"Nama Produk : {alert['name']}")
+    print(f"Lokasi Rak  : {alert['shelf_location']}")
     print(f"Status      : {alert['status']}")
     print(f"Sisa hari   : {alert['days_left']}")
     print(f"Stok Rak    : {alert['shelf_qty']}")
