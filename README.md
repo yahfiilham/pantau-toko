@@ -20,7 +20,6 @@ Tabel berikut mencatat pekerjaan implementasi yang telah dilakukan. Nama dan use
 | Rizka Sahputri | [rizkasahputri](https://github.com/rizkasahputri) | Peringatan kedaluwarsa F2, penjualan F5, dan pembaruan integrasi |
 | Maulana Malik Ibrahim | Belum dikonfirmasi | Belum ada kontribusi implementasi yang terverifikasi dalam riwayat `main` yang diperiksa; pekerjaan F1/F5 yang semula direncanakan untuknya diselesaikan oleh Calvin/Rizka |
 
-Commit lama Calvin menggunakan nama penulis Git `Calvinwu948`; nama yang dikonfigurasi saat ini adalah `kevinwu948`. Kedua nama tersebut perlu dicocokkan saat meninjau kontribusi individu. Tabel ini tetap perlu didukung riwayat Git dan penjelasan kontribusi setiap anggota dalam laporan akhir.
 
 ```bash
 git log --all --format="%h | %an | %s"
