@@ -106,10 +106,10 @@ Saat menyusun laporan, ambil tangkapan layar terminal yang memperlihatkan masuka
 
 ```mermaid
 flowchart TD
-    A([Mulai]) --> B[Buat Inventory dan muat data contoh]
-    B --> C[Tampilkan menu dan baca pilihan]
+    A([Start]) --> C[/Tampilkan menu dan baca pilihan/]
     C --> D{Pilihan tindakan}
-    D -->|0| Z([Keluar])
+    D -->|0| Z[Keluar]
+    Z --> End([Selesai])
     D -->|1, 6, 7, 8| E[Hitung dan tampilkan inventaris, peringatan, atau riwayat]
     D -->|2, 3, 5, 9| F[Baca dan validasi masukan formulir]
     D -->|4| G[Validasi PLU, jumlah, stok, dan kapasitas rak]
