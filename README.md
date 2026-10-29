@@ -107,25 +107,31 @@ Saat menyusun laporan, ambil tangkapan layar terminal yang memperlihatkan masuka
 ```mermaid
 flowchart TD
     A([Start]) --> C[/Tampilkan menu<br>dan baca pilihan/]
-    C --> D{Pilihan tindakan}
+    C --> D{Pilihan<br>tindakan}
     D -->|0| Z[Keluar]
     Z --> End([Selesai])
-    D -->|1, 6, 7, 8| E[Hitung dan tampilkan<br>inventaris, peringatan,<br>atau riwayat]
-    D -->|2, 3, 5, 9| F[Baca dan validasi<br>masukan formulir]
-    D -->|4| G[Validasi PLU, jumlah,<br>stok, dan kapasitas rak]
-    D -->|Tidak dikenal| H[Tampilkan pesan<br>pilihan tidak valid]
+    
+    D -->|1, 6, 7, 8| E[Hitung dan<br>tampilkan<br>inventaris,<br>peringatan,<br>atau riwayat]
+    D -->|2, 3, 5, 9| F[Baca dan<br>validasi<br>masukan<br>formulir]
+    D -->|4| G[Validasi PLU,<br>jumlah, stok,<br>dan kapasitas<br>rak]
+    D -->|Tidak dikenal| H[Tampilkan<br>pesan pilihan<br>tidak valid]
+    
     F --> I{Valid?}
-    I -->|Tidak| J[Tampilkan pesan kesalahan]
-    I -->|Ya| K[Tambah produk, terima stok,<br>jual, atau atur tanggal]
-    K --> L{Penjualan berhasil?}
-    L -->|Ya| M[Catat penjualan dan<br>tampilkan status<br>restock produk]
+    I -->|Tidak| J[Tampilkan<br>pesan<br>kesalahan]
+    I -->|Ya| K[Tambah produk,<br>terima stok,<br>jual, atau<br>atur tanggal]
+    
+    K --> L{Penjualan<br>berhasil?}
+    L -->|Ya| M[Catat penjualan<br>dan tampilkan<br>status restock<br>produk]
     L -->|Tidak atau tindakan lain| C
-    G --> N{Pemindahan<br>memenuhi syarat?}
+    
+    G --> N{Pemindahan<br>memenuhi<br>syarat?}
     N -->|Tidak| J
-    N -->|Ya| O[Urutkan batch berdasarkan<br>kedaluwarsa dan<br>tampilkan rencana]
-    O --> P{Konfirmasi y?}
-    P -->|Ya| Q[Pindahkan stok dan<br>catat pemindahan<br>setiap batch]
-    P -->|Tidak| R[Batalkan tanpa<br>perubahan stok]
+    N -->|Ya| O[Urutkan batch<br>berdasarkan<br>kedaluwarsa dan<br>tampilkan<br>rencana]
+    
+    O --> P{Konfirmasi<br>y?}
+    P -->|Ya| Q[Pindahkan stok<br>dan catat<br>pemindahan<br>setiap batch]
+    P -->|Tidak| R[Batalkan<br>tanpa<br>perubahan<br>stok]
+    
     E --> C
     H --> C
     J --> C
