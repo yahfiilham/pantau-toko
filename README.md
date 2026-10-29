@@ -78,7 +78,7 @@ Mulai aplikasi dalam sesi baru. Urutan berikut mencakup seluruh fitur F1–F8 me
 |---:|---|---|
 | 1 | `9` → `2026-10-28` | Tanggal simulasi menjadi 2026-10-28 |
 | 2 | `2` → `1020` → `Produk Contoh` → `Z1` → `1250` → `3` → `10` | Produk terdaftar dengan harga 1250, minimum stok 3, dan kapasitas 10 |
-| 3 | `3` → `1020` → `8` → `2027-1-11` | Batch B036: stok gudang 8, stok rak 0 |
+| 3 | `3` → `1020` → `8` → `2026-11-22` | Batch B036: stok gudang 8, stok rak 0 |
 | 4 | `3` → `1020` → `4` → `2027-10-28` | Batch B037: stok gudang 4, stok rak 0 |
 | 5 | `6` | Produk 1020 memiliki stok rak 0, stok gudang 12, dan rekomendasi restock 10 |
 | 6 | `7` | B037 berstatus EXPIRING_SOON dengan sisa 25 hari dan catatan prioritas pemindahan dari gudang |
