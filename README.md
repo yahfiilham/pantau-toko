@@ -122,7 +122,7 @@ flowchart TD
     
     K --> L{Penjualan<br>berhasil?}
     L -->|Ya| M[Catat penjualan<br>dan tampilkan<br>status restock<br>produk]
-    L -->|Tidak atau tindakan lain| C
+    L -->|Tidak| C
     
     G --> N{Pemindahan<br>memenuhi<br>syarat?}
     N -->|Tidak| J
