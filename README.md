@@ -81,7 +81,7 @@ Mulai aplikasi dalam sesi baru. Urutan berikut mencakup seluruh fitur F1–F8 me
 | 3 | `3` → `1020` → `8` → `2027-10-28` | Batch B036: stok gudang 8, stok rak 0 |
 | 4 | `3` → `1020` → `4` → `2026-11-22` | Batch B037: stok gudang 4, stok rak 0 |
 | 5 | `6` | Produk 1020 memiliki stok rak 0, stok gudang 12, dan rekomendasi restock 10 |
-| 6 | `7` | B037 berstatus EXPIRING_SOON dengan sisa 25 hari dan catatan prioritas pemindahan dari gudang |
+| 6 | `7` | B037 berstatus EXPIRING_SOON dengan sisa 24 hari dan catatan prioritas pemindahan dari gudang |
 | 7 | `4` → `1020` → `8` → `y` | FEFO memindahkan B037 × 4, lalu B036 × 4 |
 | 8 | `5` → `1020` → `6` | Penjualan mengambil B037 × 4, lalu B036 × 2; subtotal `Rp7,500`; rekomendasi restock 4 |
 | 9 | `1` → `Produk Contoh` | Stok rak 2, stok gudang 4, total 6 |
