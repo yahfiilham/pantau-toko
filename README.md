@@ -77,17 +77,17 @@ Mulai aplikasi dalam sesi baru. Urutan berikut mencakup seluruh fitur F1–F8 me
 | Langkah | Menu dan masukan berikutnya secara berurutan | Hasil yang diharapkan |
 |---:|---|---|
 | 1 | `9` → `2026-10-28` | Tanggal simulasi menjadi 2026-10-28 |
-| 2 | `2` → `AUDIT` → `Audit Product` → `Z1` → `1250` → `3` → `10` | Produk terdaftar dengan harga 1250, minimum stok 3, dan kapasitas 10 |
-| 3 | `3` → `AUDIT` → `8` → `2026-12-27` | Batch B036: stok gudang 8, stok rak 0 |
-| 4 | `3` → `AUDIT` → `4` → `2026-10-28` | Batch B037: stok gudang 4, stok rak 0 |
-| 5 | `6` | AUDIT memiliki stok rak 0, stok gudang 12, dan rekomendasi restock 10 |
+| 2 | `2` → `1020` → `Produk Contoh` → `Z1` → `1250` → `3` → `10` | Produk terdaftar dengan harga 1250, minimum stok 3, dan kapasitas 10 |
+| 3 | `3` → `1020` → `8` → `2026-12-27` | Batch B036: stok gudang 8, stok rak 0 |
+| 4 | `3` → `1020` → `4` → `2026-10-28` | Batch B037: stok gudang 4, stok rak 0 |
+| 5 | `6` | Produk 1020 memiliki stok rak 0, stok gudang 12, dan rekomendasi restock 10 |
 | 6 | `7` | B037 berstatus EXPIRING_SOON dengan sisa 0 hari dan catatan prioritas pemindahan dari gudang |
-| 7 | `4` → `AUDIT` → `8` → `y` | FEFO memindahkan B037 × 4, lalu B036 × 4 |
-| 8 | `5` → `AUDIT` → `6` | Penjualan mengambil B037 × 4, lalu B036 × 2; subtotal `Rp7,500`; rekomendasi restock 4 |
-| 9 | `1` → `Audit Product` | Stok rak 2, stok gudang 4, total 6 |
+| 7 | `4` → `1020` → `8` → `y` | FEFO memindahkan B037 × 4, lalu B036 × 4 |
+| 8 | `5` → `1020` → `6` | Penjualan mengambil B037 × 4, lalu B036 × 2; subtotal `Rp7,500`; rekomendasi restock 4 |
+| 9 | `1` → `Produk Contoh` | Stok rak 2, stok gudang 4, total 6 |
 | 10 | `8` | Terlihat satu catatan penjualan dan dua catatan pemindahan per batch |
 | 11 | `9` → `2026-12-28`, lalu `7` | B036 berstatus EXPIRED; B037 yang kosong tidak ditampilkan |
-| 12 | `5` → `AUDIT` → `1` | Penjualan ditolak karena stok rak layak jual 0 |
+| 12 | `5` → `1020` → `1` | Penjualan ditolak karena stok rak layak jual 0 |
 | 13 | `0` | Aplikasi keluar dengan normal |
 
 Setiap panah berarti menekan Enter setelah memasukkan nilai. Nomor B036/B037 mengasumsikan belum ada penerimaan stok lain dalam sesi tersebut. Produk contoh lain dapat ikut muncul dalam daftar peringatan. Nama produk uji `Audit Product` dan format keluaran `Rp7,500` dipertahankan agar sesuai dengan skenario yang telah dijalankan.
