@@ -97,6 +97,8 @@ def main():
                 print("Tidak ada peringatan kedaluwarsa.")
             else:
                 for alert in warnings:
+                    product = toko.find_product(alert["plu"])
+                    alert = dict(alert, name=product.name, shelf_location=product.shelf_location)
                     tampilkan_expiry_alert(alert)
 
         # menu 8. Activity History
@@ -150,7 +152,7 @@ def tampilkan_expiry_alert(alert):
     print(f"Stok Rak    : {alert['shelf_qty']}")
     print(f"Stok Gudang : {alert['warehouse_qty']}")
     print(f"Note        : {alert['note']}")
-    print("----------------------------------------")
+    print("----------------------------------------\n")
 
 
 def tampilkan_menu():

@@ -31,45 +31,47 @@ def load_seed_data(inventory):
         Product("1019", "Mi Sedaap Spicy", 3800, "A4", 5, 10),
     ]
 
+    # Kondisi awal: 3 batch EXPIRED (B003, B009, B021), 2 produk restock
+    # (1001 dan 1004). Batch lainnya SAFE agar demo tidak penuh peringatan.
     # Batch ID, PLU, tanggal expired, stok gudang, stok rak.
     batches = [
         # 1001: Restock Alert, stok gudang tersedia.
-        StockBatch("B001", "1001", today + timedelta(days=5), 7, 3),
+        StockBatch("B001", "1001", today + timedelta(days=36), 7, 3),
         StockBatch("B002", "1001", today + timedelta(days=40), 5, 2),
         StockBatch("B003", "1001", today - timedelta(days=2), 10, 0),
 
         # 1002: stok cukup, penjualan 6 unit memicu alert.
         StockBatch("B004", "1002", today + timedelta(days=60), 20, 15),
 
-        # 1003: stok cukup, ada batch gudang expired.
-        StockBatch("B005", "1003", today + timedelta(days=10), 5, 6),
-        StockBatch("B006", "1003", today - timedelta(days=4), 12, 0),
+        # 1003: stok cukup, seluruh batch aman.
+        StockBatch("B005", "1003", today + timedelta(days=41), 5, 6),
+        StockBatch("B006", "1003", today + timedelta(days=64), 12, 0),
 
         # 1004: Restock Alert, gudang kosong.
-        StockBatch("B007", "1004", today + timedelta(days=20), 0, 4),
+        StockBatch("B007", "1004", today + timedelta(days=51), 0, 4),
 
-        # 1005: expired tepat hari ini.
-        StockBatch("B008", "1005", today, 16, 8),
+        # 1005: stok cukup dan belum perlu peringatan expiry.
+        StockBatch("B008", "1005", today + timedelta(days=31), 16, 8),
 
-        # 1006: stok rak cukup, gudang hanya punya batch expired.
+        # 1006: stok rak cukup; B009 kedaluwarsa, batch lainnya aman.
         StockBatch("B009", "1006", today - timedelta(days=1), 14, 0),
-        StockBatch("B010", "1006", today - timedelta(days=25), 4, 0),
-        StockBatch("B011", "1006", today + timedelta(days=12), 0, 6),
+        StockBatch("B010", "1006", today + timedelta(days=65), 4, 0),
+        StockBatch("B011", "1006", today + timedelta(days=43), 0, 6),
 
         # 1007: stok tepat minimum.
         StockBatch("B012", "1007", today + timedelta(days=90), 4, 10),
 
         # 1008: dua batch dengan expiry berbeda.
         StockBatch("B013", "1008", today + timedelta(days=120), 10, 10),
-        StockBatch("B014", "1008", today + timedelta(days=28), 5, 4),
+        StockBatch("B014", "1008", today + timedelta(days=59), 5, 4),
 
         # 1009: tiga batch untuk simulasi FEFO.
-        StockBatch("B015", "1009", today + timedelta(days=2), 3, 4),
-        StockBatch("B016", "1009", today + timedelta(days=14), 5, 3),
+        StockBatch("B015", "1009", today + timedelta(days=33), 3, 4),
+        StockBatch("B016", "1009", today + timedelta(days=45), 5, 3),
         StockBatch("B017", "1009", today + timedelta(days=70), 12, 2),
 
-        # 1010: batas expiry 30 hari dan 31 hari.
-        StockBatch("B018", "1010", today + timedelta(days=30), 5, 6),
+        # 1010: seluruh batch di luar jendela peringatan 30 hari.
+        StockBatch("B018", "1010", today + timedelta(days=61), 5, 6),
         StockBatch("B019", "1010", today + timedelta(days=31), 3, 0),
 
         # 1011: stok tepat minimum.
@@ -77,7 +79,7 @@ def load_seed_data(inventory):
 
         # 1012: batch gudang expired harus dilewati.
         StockBatch("B021", "1012", today - timedelta(days=7), 6, 0),
-        StockBatch("B022", "1012", today + timedelta(days=7), 3, 5),
+        StockBatch("B022", "1012", today + timedelta(days=38), 3, 5),
         StockBatch("B023", "1012", today + timedelta(days=180), 2, 0),
 
         # 1013: stok rak tepat minimum.
@@ -88,16 +90,16 @@ def load_seed_data(inventory):
         StockBatch("B026", "1014", today + timedelta(days=400), 12, 10),
 
         # 1015: dua batch untuk FEFO.
-        StockBatch("B027", "1015", today + timedelta(days=15), 2, 4),
+        StockBatch("B027", "1015", today + timedelta(days=46), 2, 4),
         StockBatch("B028", "1015", today + timedelta(days=180), 6, 0),
 
         # 1016: stok cukup, dua batch berbeda.
         StockBatch("B029", "1016", today + timedelta(days=60), 3, 6),
         StockBatch("B030", "1016", today + timedelta(days=120), 7, 4),
 
-        # 1017: expired, hampir expired, dan aman.
-        StockBatch("B031", "1017", today - timedelta(days=5), 15, 0),
-        StockBatch("B032", "1017", today + timedelta(days=1), 9, 3),
+        # 1017: seluruh batch aman, stok rak tepat minimum.
+        StockBatch("B031", "1017", today + timedelta(days=75), 15, 0),
+        StockBatch("B032", "1017", today + timedelta(days=32), 9, 3),
         StockBatch("B033", "1017", today + timedelta(days=45), 4, 2),
 
         # 1018: stok rak tepat minimum, gudang kosong.
