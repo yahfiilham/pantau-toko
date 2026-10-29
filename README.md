@@ -106,26 +106,26 @@ Saat menyusun laporan, ambil tangkapan layar terminal yang memperlihatkan masuka
 
 ```mermaid
 flowchart TD
-    A([Start]) --> C[/Tampilkan menu dan baca pilihan/]
+    A([Start]) --> C[/Tampilkan menu<br>dan baca pilihan/]
     C --> D{Pilihan tindakan}
     D -->|0| Z[Keluar]
     Z --> End([Selesai])
-    D -->|1, 6, 7, 8| E[Hitung dan tampilkan inventaris, peringatan, atau riwayat]
-    D -->|2, 3, 5, 9| F[Baca dan validasi masukan formulir]
-    D -->|4| G[Validasi PLU, jumlah, stok, dan kapasitas rak]
-    D -->|Tidak dikenal| H[Tampilkan pesan pilihan tidak valid]
+    D -->|1, 6, 7, 8| E[Hitung dan tampilkan<br>inventaris, peringatan,<br>atau riwayat]
+    D -->|2, 3, 5, 9| F[Baca dan validasi<br>masukan formulir]
+    D -->|4| G[Validasi PLU, jumlah,<br>stok, dan kapasitas rak]
+    D -->|Tidak dikenal| H[Tampilkan pesan<br>pilihan tidak valid]
     F --> I{Valid?}
     I -->|Tidak| J[Tampilkan pesan kesalahan]
-    I -->|Ya| K[Tambah produk, terima stok, jual, atau atur tanggal]
+    I -->|Ya| K[Tambah produk, terima stok,<br>jual, atau atur tanggal]
     K --> L{Penjualan berhasil?}
-    L -->|Ya| M[Catat penjualan dan tampilkan status restock produk]
+    L -->|Ya| M[Catat penjualan dan<br>tampilkan status<br>restock produk]
     L -->|Tidak atau tindakan lain| C
-    G --> N{Pemindahan memenuhi syarat?}
+    G --> N{Pemindahan<br>memenuhi syarat?}
     N -->|Tidak| J
-    N -->|Ya| O[Urutkan batch berdasarkan kedaluwarsa dan tampilkan rencana]
+    N -->|Ya| O[Urutkan batch berdasarkan<br>kedaluwarsa dan<br>tampilkan rencana]
     O --> P{Konfirmasi y?}
-    P -->|Ya| Q[Pindahkan stok dan catat pemindahan setiap batch]
-    P -->|Tidak| R[Batalkan tanpa perubahan stok]
+    P -->|Ya| Q[Pindahkan stok dan<br>catat pemindahan<br>setiap batch]
+    P -->|Tidak| R[Batalkan tanpa<br>perubahan stok]
     E --> C
     H --> C
     J --> C
