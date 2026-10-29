@@ -12,7 +12,7 @@ def sell(inventory, plu, qty):
     if not product:
         return False, "Produk tidak ditemukan."
 
-    if not isinstance(qty, int):
+    if type(qty) is not int:
         return False, "Kuantitas harus berupa angka bulat."
     if qty <= 0:
         return False, "Kuantitas harus lebih dari 0."
